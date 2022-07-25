@@ -1,4 +1,5 @@
 from flask import Flask, request, abort
+import random
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -7,7 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
+import re
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
@@ -39,9 +40,75 @@ def callback():
 ##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token,message)
-
+    message = text=event.message.text
+    if re.match('我要吃飯',message):
+        flex_message = TextSendMessage(text='你想吃哪種類型的食物呢？',
+                               quick_reply=QuickReply(items=[
+                                   QuickReplyButton(action=MessageAction(label="早餐", text="早餐")),
+                                   QuickReplyButton(action=MessageAction(label="午餐", text="午餐")),
+                                   QuickReplyButton(action=MessageAction(label="晚餐", text="晚餐")),
+                                   QuickReplyButton(action=MessageAction(label="下午茶", text="下午茶")),
+                                   QuickReplyButton(action=MessageAction(label="消夜", text="消夜")),
+                               ]))
+        line_bot_api.reply_message(event.reply_token, flex_message)
+    elif re.match('早餐',message):
+        ret = random.randint(1, 10)
+        if ret > 7:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃蛋餅喔'))
+        elif ret > 4:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃三明治喔'))
+        else:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃蘿蔔糕喔'))
+    elif re.match('午餐',message):
+        ret = random.randint(1, 10)
+        if ret > 7:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃巷口便當喔'))
+        elif ret > 4:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃韓國料理喔'))
+        else:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃日本拉麵喔'))
+    elif re.match('晚餐',message):
+        ret = random.randint(1, 10)
+        if ret > 7:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃牛排喔'))
+        elif ret > 4:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃炒飯喔'))
+        else:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃定食喔'))
+    elif re.match('下午茶',message):
+        ret = random.randint(1, 10)
+        if ret > 7:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃蛋糕喔'))
+        elif ret > 4:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃鬆餅喔'))
+        else:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你鯛魚燒喔'))
+    elif re.match('消夜',message):
+        ret = random.randint(1, 10)
+        if ret > 7:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃泡麵喔'))
+        elif ret > 4:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃洋芋片喔'))
+        else:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你布丁喔'))    
+    elif re.match('聊天',message):
+        b = True;
+        line_bot_api.reply_message(event.reply_token,TextSendMessage('太好了。聊天是我的強項。輸入任何你想對我說的話吧。'))
+        b = False;
+    elif b == False: 
+        if re.match('你好難聊',message):
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('被你發現了，可惡。'))
+        elif re.match('名字',message):
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('我是FoodieBot，某個暑假很閒的人做了我。'))
+        else:
+            ret = random.randint(1, 10)
+            if ret > 7:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('我同意你說的，雖然我不太清楚你想表達什麼。'))
+            elif ret > 4:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('好喔。'))
+            else:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('我突然覺得，我們還是來聊吃的比較好。'))    
+            
 #主程式
 import os
 if __name__ == "__main__":
