@@ -53,26 +53,38 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, flex_message)
     elif re.match('早餐',message):
         ret = random.randint(1, 10)
-        if ret > 7:
+        if ret > 8:
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃蛋餅喔'))
-        elif ret > 4:
+        elif ret > 6:
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃三明治喔'))
+        elif ret > 4:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃燒餅喔'))
+        elif ret > 2:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃吐司喔'))
         else:
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃蘿蔔糕喔'))
     elif re.match('午餐',message):
         ret = random.randint(1, 10)
-        if ret > 7:
+        if ret > 8:
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃巷口便當喔'))
+        elif ret > 6:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃韓式料理喔'))
         elif ret > 4:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃韓國料理喔'))
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃義式餐廳喔'))
+        elif ret > 2:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃外賣喔'))
         else:
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃日本拉麵喔'))
     elif re.match('晚餐',message):
         ret = random.randint(1, 10)
-        if ret > 7:
+        if ret > 8:
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃牛排喔'))
+        elif ret > 6:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃鐵板燒喔'))
         elif ret > 4:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃炒飯喔'))
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃義大利麵喔'))
+        elif ret > 2:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃外賣喔'))
         else:
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃定食喔'))
     elif re.match('下午茶',message):
@@ -85,30 +97,52 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你鯛魚燒喔'))
     elif re.match('消夜',message):
         ret = random.randint(1, 10)
-        if ret > 7:
+        if ret > 8:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃洋芋片喔'))
+        elif ret > 6:
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃泡麵喔'))
         elif ret > 4:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃洋芋片喔'))
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃巧克力喔'))
+        elif ret > 2:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃果凍喔'))
         else:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你布丁喔'))    
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃布丁喔'))    
     elif re.match('聊天',message):
-        b = True;
         line_bot_api.reply_message(event.reply_token,TextSendMessage('太好了。聊天是我的強項。輸入任何你想對我說的話吧。'))
-        b = False;
-    elif b == False: 
+    else: 
         if re.match('你好難聊',message):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('被你發現了，可惡。'))
         elif re.match('名字',message):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('我是FoodieBot，某個暑假很閒的人做了我。'))
+        elif re.match('你的名字',message):
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('我是FoodieBot，某個暑假很閒的人做了我。'))
+        elif re.match('你叫什麼',message):
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('我是FoodieBot，某個暑假很閒的人做了我。'))
+        elif re.match('你叫什麼名字',message):
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('我是FoodieBot，某個暑假很閒的人做了我。'))
         else:
             ret = random.randint(1, 10)
-            if ret > 7:
-                line_bot_api.reply_message(event.reply_token,TextSendMessage('我同意你說的，雖然我不太清楚你想表達什麼。'))
-            elif ret > 4:
+            if ret == 10:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('我同意你說的。'))
+            elif ret == 9:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('好喔。'))
-            else:
-                line_bot_api.reply_message(event.reply_token,TextSendMessage('我突然覺得，我們還是來聊吃的比較好。'))    
-            
+            elif ret == 8:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('我突然覺得，我們還是來聊吃的比較好。'))  
+            elif ret == 7:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('跟你分享一下，我是用一堆If跟Else的條件式寫出來的，很明顯是發明我的人還不清楚怎麼讓我「聰明」一點。'))
+            elif ret == 6:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('我昨天晚餐吃漢堡，非常推薦，他的店名是...我忘了。'))  
+            elif ret == 5:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('話說，你不覺得今天很熱嗎?'))
+            elif ret == 4:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('哈哈哈哈...好吧，老實說沒有什麼好笑的，但我希望你也聊得開心。'))  
+            elif ret == 3:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('我不喜歡這種話題。'))
+            elif ret == 2:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('我喜歡這個！'))    
+            elif ret == 1:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('是嗎？我不這麼覺得。'))
+                
 #主程式
 import os
 if __name__ == "__main__":
