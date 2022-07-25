@@ -52,6 +52,54 @@ def handle_message(event):
                                    QuickReplyButton(action=MessageAction(label="消夜", text="消夜")),
                                ]))
         line_bot_api.reply_message(event.reply_token, flex_message)
+    elif re.match('遊戲',message):
+        flex_message = TextSendMessage(text='有三個按鈕，其中一個會是鴨子，找到鴨子就贏了。選擇一個按鈕點擊。',
+                               quick_reply=QuickReply(items=[
+                                   QuickReplyButton(action=MessageAction(label="1", text="選擇了1")),
+                                   QuickReplyButton(action=MessageAction(label="2", text="選擇了2")),
+                                   QuickReplyButton(action=MessageAction(label="3", text="選擇了3")),
+
+                               ]))
+        line_bot_api.reply_message(event.reply_token, flex_message)
+    elif re.match('選擇了1',message):
+        ret = random.randint(1, 4)
+        if ret == 1:
+            sticker_message = StickerSendMessage(
+                package_id='11537',
+                sticker_id='52002736'
+            )
+        else:
+            sticker_message = StickerSendMessage(
+                package_id='11537',
+                sticker_id='52002751'
+            )
+        line_bot_api.reply_message(event.reply_token, sticker_message)
+    elif re.match('選擇了2',message):
+        ret = random.randint(1, 4)
+        if ret == 1:
+            sticker_message = StickerSendMessage(
+                package_id='11537',
+                sticker_id='52002741'
+            )
+        else:
+            sticker_message = StickerSendMessage(
+                package_id='11537',
+                sticker_id='52002765'
+            )
+        line_bot_api.reply_message(event.reply_token, sticker_message)
+    elif re.match('選擇了3',message):
+        ret = random.randint(1, 4)
+        if ret == 1:
+            sticker_message = StickerSendMessage(
+                package_id='789',
+                sticker_id='10856'
+            )
+        else:
+            sticker_message = StickerSendMessage(
+                package_id='1070',
+                sticker_id='17857'
+            )
+        line_bot_api.reply_message(event.reply_token, sticker_message)
     elif re.match('早餐',message):
         ret = random.randint(1, 10)
         if ret > 8:
@@ -110,6 +158,18 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('建議你吃布丁喔'))    
     elif re.match('聊天',message):
         line_bot_api.reply_message(event.reply_token,TextSendMessage('太好了。聊天是我的強項。輸入任何你想對我說的話吧。'))
+    elif re.match('聽歌',message):
+        ret = random.randint(1, 10)
+        if ret > 8:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('推薦：獨立樂團    https://www.youtube.com/watch?v=KwH4wVaAHKs'))
+        elif ret > 6:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('推薦：EDM    https://www.youtube.com/watch?v=gnV-8pkILF0'))
+        elif ret > 4:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('推薦：嘻哈   https://www.youtube.com/watch?v=mZHTwjLznVg'))
+        elif ret > 2:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('推薦：韓國   https://www.youtube.com/watch?v=RUQlqwapSYw'))
+        else:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('推薦：日本   https://www.youtube.com/watch?v=N0lwQ3NjcKQ'))    
     else: 
         if re.match('你好難聊',message):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('被你發現了，可惡。'))
