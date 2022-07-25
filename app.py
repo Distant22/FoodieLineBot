@@ -123,9 +123,9 @@ def handle_message(event):
         elif re.match('你叫什麼名字',message):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('我是FoodieBot，某個暑假很閒的人做了我。'))
         else:
-            ret = random.randint(1, 15)
+            ret = random.randint(1, 12)
             while ret==repeat:
-                ret = random.randint(1, 15) 
+                ret = random.randint(1, 12) 
             if ret == 10:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('我同意你說的。'))
                 repeat = 10
@@ -162,15 +162,6 @@ def handle_message(event):
             elif ret == 12:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('有什麼推薦的音樂嗎？'))  
                 repeat = 12
-            elif ret == 13:
-                line_bot_api.reply_message(event.reply_token,TextSendMessage('你真的滿幽默的。'))
-                repeat = 13
-            elif ret == 14:
-                line_bot_api.reply_message(event.reply_token,TextSendMessage('我不清楚耶。'))    
-                repeat = 14
-            elif ret == 15:
-                line_bot_api.reply_message(event.reply_token,TextSendMessage('第一次聽說！'))
-                repeat = 15
                 
 #主程式
 import os
