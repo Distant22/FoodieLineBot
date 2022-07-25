@@ -17,7 +17,7 @@ line_bot_api = LineBotApi('4u2h57qP4tLIbTAo/BvQ1DjK7otDnY0Kt/VV9UEWVYtrTW7pJAD0F
 # 必須放上自己的Channel Secret
 handler = WebhookHandler('a94a357808f36bd53c3ca27ef0539558')
 
-line_bot_api.push_message('Ub3236a9b4f272ed3bfcba6dd678343a0', TextSendMessage(text='你可以開始了'))
+line_bot_api.push_message('Ub3236a9b4f272ed3bfcba6dd678343a0', TextSendMessage(text='開機完成。'))
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST'])
@@ -177,6 +177,12 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('我是FoodieBot，某個暑假很閒的人做了我。'))
         elif re.match('幹',message):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('請保持禮貌。'))
+        elif re.match('你幾歲',message):
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('剛出生幾個小時，我想滿年輕的。'))
+        elif re.match('我愛你',message):
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('你給的愛，我承受不起。'))
+        elif re.match('我喜歡你',message):
+            line_bot_api.reply_message(event.reply_token,TextSendMessage('你給的喜歡，我承受不起。'))
         elif re.match('靠北',message):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('請保持禮貌。'))
         elif re.match('三小',message):
