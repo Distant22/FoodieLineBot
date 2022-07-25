@@ -11,6 +11,8 @@ from linebot.models import *
 import re
 app = Flask(__name__)
 
+repeat = 0
+
 # 必須放上自己的Channel Access Token
 line_bot_api = LineBotApi('4u2h57qP4tLIbTAo/BvQ1DjK7otDnY0Kt/VV9UEWVYtrTW7pJAD0FCQukQDLfcaNPHVE69KdAdcDYYSrbDhiLMKVEPR4pK8oOb/eJyMw6caTbOYQRFiWoKFqb1tYqEgNDB0tq+VUrqgpIqDJ3T7OAgdB04t89/1O/w1cDnyilFU=')
 # 必須放上自己的Channel Secret
@@ -121,27 +123,54 @@ def handle_message(event):
         elif re.match('你叫什麼名字',message):
             line_bot_api.reply_message(event.reply_token,TextSendMessage('我是FoodieBot，某個暑假很閒的人做了我。'))
         else:
-            ret = random.randint(1, 10)
+            ret = random.randint(1, 15)
+            while ret==repeat:
+                ret = random.randint(1, 15) 
             if ret == 10:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('我同意你說的。'))
+                repeat = 10
             elif ret == 9:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('好喔。'))
+                repeat = 9
             elif ret == 8:
-                line_bot_api.reply_message(event.reply_token,TextSendMessage('我突然覺得，我們還是來聊吃的比較好。'))  
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('我突然覺得，我們還是來聊吃的比較好。')) 
+                repeat = 8 
             elif ret == 7:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('跟你分享一下，我是用一堆If跟Else的條件式寫出來的，很明顯是發明我的人還不清楚怎麼讓我「聰明」一點。'))
+                repeat = 7
             elif ret == 6:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('我昨天晚餐吃漢堡，非常推薦，他的店名是...我忘了。'))  
+                repeat = 6
             elif ret == 5:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('話說，你不覺得今天很熱嗎?'))
+                repeat = 5
             elif ret == 4:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('哈哈哈哈...好吧，老實說沒有什麼好笑的，但我希望你也聊得開心。'))  
+                repeat = 4
             elif ret == 3:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('我不喜歡這種話題。'))
+                repeat = 3
             elif ret == 2:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('我喜歡這個！'))    
+                repeat = 2
             elif ret == 1:
                 line_bot_api.reply_message(event.reply_token,TextSendMessage('是嗎？我不這麼覺得。'))
+                repeat = 1
+            elif ret == 11:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('別人常說我的推薦不準，我覺得只是他們沒找到好吃的店而已。'))
+                repeat = 11
+            elif ret == 12:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('有什麼推薦的音樂嗎？'))  
+                repeat = 12
+            elif ret == 13:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('你真的滿幽默的。'))
+                repeat = 13
+            elif ret == 14:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('我不清楚耶。'))    
+                repeat = 14
+            elif ret == 15:
+                line_bot_api.reply_message(event.reply_token,TextSendMessage('第一次聽說！'))
+                repeat = 15
                 
 #主程式
 import os
